@@ -1,0 +1,16 @@
+MUSCLE License Notice
+
+This TAFFISH app packages MUSCLE from:
+
+  https://github.com/rcedgar/muscle
+
+Upstream MUSCLE v5.3 is licensed under the GNU General Public License version 3
+(GPL-3.0). The full upstream license text is included in the container at:
+
+  /usr/local/share/doc/muscle/LICENSE
+
+The upstream license is also available at:
+
+  https://github.com/rcedgar/muscle/blob/v5.3/LICENSE
+
+This TAFFISH packaging does not change the upstream license.

@@ -1,0 +1,49 @@
+[package]
+name = "muscle"
+kind = "tool"
+version = "5.3"
+release = 1
+license = "GPL-3.0"
+main = "src/main.taf"
+
+[meta]
+domain = "bio"
+categories = ["multiple-sequence-alignment", "protein-alignment", "nucleotide-alignment", "structure-alignment", "phylogenetics"]
+keywords = ["muscle", "muscle5", "MSA", "multiple sequence alignment", "alignment ensembles", "FASTA", "EFA", "Super5", "Muscle-3D"]
+description = "MUSCLE 5 makes high-accuracy multiple sequence alignments and alignment ensembles, with structure-alignment support for Reseek mega inputs."
+
+[repository]
+url = "https://github.com/taffish/muscle"
+
+[command]
+name = "taf-muscle"
+
+[runtime]
+pipe = true
+command_mode = true
+
+[container]
+image = "ghcr.io/taffish/muscle:5.3-r1"
+dockerfile = "docker/Dockerfile"
+build_platforms = "linux/amd64,linux/arm64"
+
+[upstream]
+name = "MUSCLE"
+type = "github"
+repo = "rcedgar/muscle"
+homepage = "https://drive5.com/muscle5/"
+release_url = "https://github.com/rcedgar/muscle/releases/tag/v5.3"
+downloads = "https://github.com/rcedgar/muscle/archive/refs/tags/v5.3.tar.gz"
+version = "5.3"
+license = "GPL-3.0"
+citation = "Edgar 2022"
+doi = "10.1038/s41467-022-34630-w"
+pmid = "36379955"
+watch = "github-releases"
+strip_prefix = "v"
+
+[smoke]
+backend = "docker"
+timeout = 180
+exist = ["muscle", "sh", "grep", "sed"]
+test = ["test \"$(cat /usr/local/share/doc/muscle/VERSION)\" = '5.3'", "muscle -version 2>&1 | sed -n '1p' | grep -Fx 'muscle 5.3.linux64 [v5.3-taffish-r1]' >/dev/null", "muscle -h 2>&1 | grep -F 'Align FASTA input' >/dev/null", "muscle -h 2>&1 | grep -F 'Ensemble FASTA (EFA)' >/dev/null", "ldd \"$(command -v muscle)\" 2>&1 | grep -F 'not a dynamic executable' >/dev/null", "mkdir -p /tmp/taf-muscle-align && cd /tmp/taf-muscle-align && printf '>s1\\nACGTACGTACGT\\n>s2\\nACGTCGTACGT\\n>s3\\nACGTACGACGT\\n' > in.fa && muscle -align in.fa -output aln.afa >/dev/null 2> align.log && test -s aln.afa && grep -F '>s1' aln.afa >/dev/null && grep -F '>s2' aln.afa >/dev/null && grep -F '>s3' aln.afa >/dev/null", "mkdir -p /tmp/taf-muscle-super5 && cd /tmp/taf-muscle-super5 && printf '>s1\\nACGTACGTACGT\\n>s2\\nACGTCGTACGT\\n>s3\\nACGTACGACGT\\n' > in.fa && muscle -super5 in.fa -output super5.afa >/dev/null 2> super5.log && test -s super5.afa && grep -F '>s1' super5.afa >/dev/null", "mkdir -p /tmp/taf-muscle-ensemble && cd /tmp/taf-muscle-ensemble && printf '>s1\\nACGTACGTACGT\\n>s2\\nACGTCGTACGT\\n>s3\\nACGTACGACGT\\n' > in.fa && muscle -align in.fa -diversified -replicates 2 -output ensemble.efa >/dev/null 2> ensemble.log && test -s ensemble.efa && grep -F '<none.0' ensemble.efa >/dev/null && muscle -maxcc ensemble.efa -output maxcc.afa >/dev/null 2> maxcc.log && test -s maxcc.afa && muscle -resample ensemble.efa -replicates 1 -output resampled.efa >/dev/null 2> resample.log && test -s resampled.efa && muscle -efa_explode ensemble.efa >/dev/null 2> explode.log && test -s none.0 && test -s abc.1"]
