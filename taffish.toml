@@ -2,7 +2,7 @@
 name = "muscle"
 kind = "tool"
 version = "5.3"
-release = 1
+release = 2
 license = "GPL-3.0"
 main = "src/main.taf"
 
@@ -23,7 +23,7 @@ pipe = true
 command_mode = true
 
 [container]
-image = "ghcr.io/taffish/muscle:5.3-r1"
+image = "ghcr.io/taffish/muscle:5.3-r2"
 dockerfile = "docker/Dockerfile"
 build_platforms = "linux/amd64,linux/arm64"
 
@@ -46,4 +46,4 @@ strip_prefix = "v"
 backend = "docker"
 timeout = 180
 exist = ["muscle", "sh", "grep", "sed"]
-test = ["test \"$(cat /usr/local/share/doc/muscle/VERSION)\" = '5.3'", "muscle -version 2>&1 | sed -n '1p' | grep -Fx 'muscle 5.3.linux64 [v5.3-taffish-r1]' >/dev/null", "muscle -h 2>&1 | grep -F 'Align FASTA input' >/dev/null", "muscle -h 2>&1 | grep -F 'Ensemble FASTA (EFA)' >/dev/null", "ldd \"$(command -v muscle)\" 2>&1 | grep -F 'not a dynamic executable' >/dev/null", "mkdir -p /tmp/taf-muscle-align && cd /tmp/taf-muscle-align && printf '>s1\\nACGTACGTACGT\\n>s2\\nACGTCGTACGT\\n>s3\\nACGTACGACGT\\n' > in.fa && muscle -align in.fa -output aln.afa >/dev/null 2> align.log && test -s aln.afa && grep -F '>s1' aln.afa >/dev/null && grep -F '>s2' aln.afa >/dev/null && grep -F '>s3' aln.afa >/dev/null", "mkdir -p /tmp/taf-muscle-super5 && cd /tmp/taf-muscle-super5 && printf '>s1\\nACGTACGTACGT\\n>s2\\nACGTCGTACGT\\n>s3\\nACGTACGACGT\\n' > in.fa && muscle -super5 in.fa -output super5.afa >/dev/null 2> super5.log && test -s super5.afa && grep -F '>s1' super5.afa >/dev/null", "mkdir -p /tmp/taf-muscle-ensemble && cd /tmp/taf-muscle-ensemble && printf '>s1\\nACGTACGTACGT\\n>s2\\nACGTCGTACGT\\n>s3\\nACGTACGACGT\\n' > in.fa && muscle -align in.fa -diversified -replicates 2 -output ensemble.efa >/dev/null 2> ensemble.log && test -s ensemble.efa && grep -F '<none.0' ensemble.efa >/dev/null && muscle -maxcc ensemble.efa -output maxcc.afa >/dev/null 2> maxcc.log && test -s maxcc.afa && muscle -resample ensemble.efa -replicates 1 -output resampled.efa >/dev/null 2> resample.log && test -s resampled.efa && muscle -efa_explode ensemble.efa >/dev/null 2> explode.log && test -s none.0 && test -s abc.1"]
+test = ["test \"$(cat /usr/local/share/doc/muscle/VERSION)\" = '5.3'", "muscle -version 2>&1 | sed -n '1p' | grep -Fx 'muscle 5.3.linux64 [v5.3-taffish-r2]' >/dev/null", "muscle -h 2>&1 | grep -F 'Align FASTA input' >/dev/null", "muscle -h 2>&1 | grep -F 'Ensemble FASTA (EFA)' >/dev/null", "ldd \"$(command -v muscle)\" 2>&1 | grep -F 'not a dynamic executable' >/dev/null", "mkdir -p /tmp/taf-muscle-align && cd /tmp/taf-muscle-align && printf '>s1\\nACGTACGTACGT\\n>s2\\nACGTCGTACGT\\n>s3\\nACGTACGACGT\\n' > in.fa && muscle -align in.fa -output aln.afa >/dev/null 2> align.log && test -s aln.afa && grep -F '>s1' aln.afa >/dev/null && grep -F '>s2' aln.afa >/dev/null && grep -F '>s3' aln.afa >/dev/null", "mkdir -p /tmp/taf-muscle-super5 && cd /tmp/taf-muscle-super5 && printf '>s1\\nACGTACGTACGT\\n>s2\\nACGTCGTACGT\\n>s3\\nACGTACGACGT\\n' > in.fa && muscle -super5 in.fa -output super5.afa >/dev/null 2> super5.log && test -s super5.afa && grep -F '>s1' super5.afa >/dev/null", "mkdir -p /tmp/taf-muscle-ensemble && cd /tmp/taf-muscle-ensemble && printf '>s1\\nACGTACGTACGT\\n>s2\\nACGTCGTACGT\\n>s3\\nACGTACGACGT\\n' > in.fa && muscle -align in.fa -diversified -replicates 2 -output ensemble.efa >/dev/null 2> ensemble.log && test -s ensemble.efa && grep -F '<none.0' ensemble.efa >/dev/null && muscle -maxcc ensemble.efa -output maxcc.afa >/dev/null 2> maxcc.log && test -s maxcc.afa && muscle -resample ensemble.efa -replicates 1 -output resampled.efa >/dev/null 2> resample.log && test -s resampled.efa && muscle -efa_explode ensemble.efa >/dev/null 2> explode.log && test -s none.0 && test -s abc.1"]

@@ -4,13 +4,31 @@ TAFFISH wrapper for [MUSCLE 5](https://github.com/rcedgar/muscle), software for
 multiple sequence alignment, alignment ensembles, and Reseek-based structure
 alignment inputs.
 
-This app packages upstream MUSCLE `v5.3` as `5.3-r1`. The container builds from
+This app packages upstream MUSCLE `v5.3` as `5.3-r2`. The container builds from
 the upstream source tag rather than copying the release binaries, because the
 official `muscle-aarch64.v5.3` Linux asset fails immediately on `linux/arm64`
 with a pointer-size assertion. The TAFFISH build applies one small portability
 patch: Linux `__aarch64__` is recognized as a 64-bit platform. It also removes
 `-march=native` from the generated Makefile so the static binary is not tied to
 the build host CPU.
+
+Release `5.3-r2` refreshes the terminal `taf-muscle --help` text and aligns the
+TAFFISH build marker embedded in the MUSCLE version line. It keeps the upstream
+source, runtime dependencies, smoke coverage, and command behavior unchanged
+from `5.3-r1`; the runtime version string is now
+`muscle 5.3.linux64 [v5.3-taffish-r2]`.
+
+Package metadata:
+
+```text
+name: muscle
+command: taf-muscle
+version: 5.3-r2
+kind: tool
+image: ghcr.io/taffish/muscle:5.3-r2
+upstream release: v5.3
+upstream runtime version: muscle 5.3.linux64 [v5.3-taffish-r2]
+```
 
 ## Install
 
@@ -85,7 +103,7 @@ used only while building the image and is not part of the runtime path.
 Runtime version output is:
 
 ```text
-muscle 5.3.linux64 [v5.3-taffish-r1]
+muscle 5.3.linux64 [v5.3-taffish-r2]
 ```
 
 The `linux64` platform label is MUSCLE's upstream label for 64-bit Linux builds;

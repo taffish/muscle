@@ -60,7 +60,7 @@ RUN set -eux; \
     sed -i "s/defined(__arm64__)/defined(__arm64__) || defined(__aarch64__)/" src/myutils.h; \
     cd src; \
     ./vcxproj_make.py --openmp; \
-    printf '"v%s-taffish-r1"\n' "${MUSCLE_VERSION}" > gitver.txt; \
+    printf '"v%s-taffish-r2"\n' "${MUSCLE_VERSION}" > gitver.txt; \
     make -j"$(nproc)"; \
     install -D -m 0755 ../bin/muscle /opt/muscle/bin/muscle; \
     install -D -m 0644 ../README.md /opt/muscle/share/doc/muscle/README.md; \
@@ -68,7 +68,7 @@ RUN set -eux; \
     printf "%s\n" "${MUSCLE_VERSION}" > /opt/muscle/share/doc/muscle/VERSION; \
     printf "%s\n" "Adds __aarch64__ to MUSCLE's 64-bit platform macro for Linux arm64 builds; removes -march=native for portable container binaries." \
       > /opt/muscle/share/doc/muscle/TAFFISH_PATCHES; \
-    /opt/muscle/bin/muscle -version 2>&1 | sed -n "1p" | grep -Fx "muscle ${MUSCLE_VERSION}.linux64 [v${MUSCLE_VERSION}-taffish-r1]" >/dev/null; \
+    /opt/muscle/bin/muscle -version 2>&1 | sed -n "1p" | grep -Fx "muscle ${MUSCLE_VERSION}.linux64 [v${MUSCLE_VERSION}-taffish-r2]" >/dev/null; \
     ldd /opt/muscle/bin/muscle 2>&1 | grep -F "not a dynamic executable" >/dev/null
 
 RUN set -eux; \
@@ -100,7 +100,7 @@ RUN set -eux; \
     ln -s /opt/muscle/bin/muscle /usr/local/bin/muscle; \
     mkdir -p /usr/local/share/doc; \
     ln -s /opt/muscle/share/doc/muscle /usr/local/share/doc/muscle; \
-    muscle -version 2>&1 | sed -n "1p" | grep -Fx "muscle 5.3.linux64 [v5.3-taffish-r1]" >/dev/null; \
+    muscle -version 2>&1 | sed -n "1p" | grep -Fx "muscle 5.3.linux64 [v5.3-taffish-r2]" >/dev/null; \
     muscle -h 2>&1 | grep -F "Align FASTA input" >/dev/null; \
     ldd "$(command -v muscle)" 2>&1 | grep -F "not a dynamic executable" >/dev/null
 

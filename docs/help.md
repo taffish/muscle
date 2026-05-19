@@ -1,4 +1,4 @@
-# muscle Help
+taf-muscle 5.3-r2
 
 MUSCLE 5 makes multiple sequence alignments, alignment ensembles, and
 Reseek-based structure alignments.
@@ -36,13 +36,15 @@ Structure-alignment input:
     taf-muscle -- -super7 structs.mega -distmxin structs.distmx -reseek -output structs.afa
 
 Notes:
-  This app builds MUSCLE 5.3 from the upstream source tag with a small Linux
-  aarch64 platform-macro patch and without -march=native. Native container
-  platforms are linux/amd64 and linux/arm64. The static binary reports:
-    muscle 5.3.linux64 [v5.3-taffish-r1]
-  The runtime image contains the single static muscle executable plus upstream
+  This app builds MUSCLE 5.3 from upstream source with a small Linux aarch64
+  platform-macro patch and without -march=native. Native container platforms
+  are linux/amd64 and linux/arm64. The static binary reports:
+    muscle 5.3.linux64 [v5.3-taffish-r2]
+  The runtime image contains the static muscle executable plus upstream
   docs/license/version markers; build-only helpers are not shipped.
 
 Boundaries:
-  This app packages MUSCLE only. It does not bundle Reseek, tree-building tools,
-  downstream phylogenetic tools, PDB/mmCIF download helpers, or benchmark data.
+  This app packages MUSCLE only. It does not bundle Reseek, tree-building
+  tools, downstream phylogenetic tools, PDB/mmCIF download helpers, or
+  benchmark data. Generate structure inputs and downstream reports outside this
+  app, then pass the prepared files to taf-muscle.
