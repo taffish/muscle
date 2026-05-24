@@ -100,7 +100,7 @@ RUN set -eux; \
     ln -s /opt/muscle/bin/muscle /usr/local/bin/muscle; \
     mkdir -p /usr/local/share/doc; \
     ln -s /opt/muscle/share/doc/muscle /usr/local/share/doc/muscle; \
-    muscle -version 2>&1 | sed -n "1p" | grep -Fx "muscle 5.3.linux64 [v5.3-taffish-r3]" >/dev/null; \
+    muscle -version 2>&1 | sed -n "1p" | grep -Fx "muscle 5.3.linux64 [v5.3-taffish-r2]" >/dev/null; \
     muscle -h 2>&1 | grep -F "Align FASTA input" >/dev/null; \
     ldd "$(command -v muscle)" 2>&1 | grep -F "not a dynamic executable" >/dev/null
 

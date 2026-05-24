@@ -1,4 +1,4 @@
-taf-muscle 5.3-r3
+taf-muscle 5.3-r4
 
 MUSCLE 5 makes multiple sequence alignments, alignment ensembles, and
 Reseek-based structure alignments.
@@ -39,7 +39,7 @@ Notes:
   This app builds MUSCLE 5.3 from upstream source with a small Linux aarch64
   platform-macro patch and without -march=native. Native container platforms
   are linux/amd64 and linux/arm64. The static binary reports:
-    muscle 5.3.linux64 [v5.3-taffish-r3]
+    muscle 5.3.linux64 [v5.3-taffish-r2]
   The runtime image contains the static muscle executable plus upstream
   docs/license/version markers; build-only helpers are not shipped.
 
