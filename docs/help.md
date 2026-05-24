@@ -1,4 +1,4 @@
-taf-muscle 5.3-r2
+taf-muscle 5.3-r3
 
 MUSCLE 5 makes multiple sequence alignments, alignment ensembles, and
 Reseek-based structure alignments.
@@ -39,9 +39,15 @@ Notes:
   This app builds MUSCLE 5.3 from upstream source with a small Linux aarch64
   platform-macro patch and without -march=native. Native container platforms
   are linux/amd64 and linux/arm64. The static binary reports:
-    muscle 5.3.linux64 [v5.3-taffish-r2]
+    muscle 5.3.linux64 [v5.3-taffish-r3]
   The runtime image contains the static muscle executable plus upstream
   docs/license/version markers; build-only helpers are not shipped.
+
+License:
+  TAFFISH app packaging: Apache-2.0.
+  Upstream software: GPL-3.0.
+  Bundled components, data, models, and external resources keep their
+  own license terms.
 
 Boundaries:
   This app packages MUSCLE only. It does not bundle Reseek, tree-building
